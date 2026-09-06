@@ -1,3 +1,0 @@
-# HTTPRoute disabled for vcluster target (no Gateway API CRDs on the vcluster).
-# External routing for vcluster-deployed tenants is declared ON THE HOST via the
-# `api-gateway-route` template (HTTPRoute in istio-ingress + ReferenceGrant -> vcluster-synced Service).

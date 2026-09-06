@@ -6,8 +6,9 @@ on:
   pull_request:
 
 env:
-  IMAGE_NAME: payment-service
-  IMAGE_TAG: 
+  IMAGE_NAME: ${{ github.event.repository.name }}
+  IMAGE_TAG: ${{ github.sha }}
+  REGISTRY: ghcr.io
 
 jobs:
   test:
@@ -38,16 +39,16 @@ jobs:
       contents: read
       packages: write
     outputs:
-      image: ghcr.io/catalyst-orgs/payment-service:
+      image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: 
-          password: 
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -57,7 +58,7 @@ jobs:
         with:
           context: .
           file: docker/Dockerfile
-          push: true
+          push: ${{ github.event_name == 'push' }}
           tags: |
-            ghcr.io/catalyst-orgs/payment-service:
-            ghcr.io/catalyst-orgs/payment-service:latest
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
