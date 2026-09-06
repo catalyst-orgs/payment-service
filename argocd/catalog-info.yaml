@@ -1,0 +1,41 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: payment-service
+  description: 
+  annotations:
+    github.com/project-slug: catalyst-orgs/payment-service
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: payment-service
+    backstage.io/kubernetes-namespace: payment-service
+    argocd/app-name: payment-service
+  tags:
+    - fastapi
+    - python
+    - microservice
+  links:
+    - url: https://grafana.platformcatalyst.dev/d/payment-service-dashboard
+      title: Grafana Dashboard
+      icon: dashboard
+spec:
+  type: service
+  lifecycle: production
+  owner: 
+  system: platform-services
+  providesApis:
+    - payment-service-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: payment-service-api
+  description: REST API for payment-service
+  tags:
+    - rest
+    - openapi
+spec:
+  type: openapi
+  lifecycle: production
+  owner: 
+  definition:
+    $text: https://github.com/catalyst-orgs/payment-service/blob/main/spec/openapi.yaml
