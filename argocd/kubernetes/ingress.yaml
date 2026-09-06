@@ -1,0 +1,1 @@
+# Ingress disabled for vcluster target (no istio / cert-manager on the vcluster).

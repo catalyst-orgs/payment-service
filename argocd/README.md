@@ -1,6 +1,6 @@
 # payment-service
 
-Payment Service Backend
+
 
 ## Overview
 
@@ -8,8 +8,8 @@ Payment Service Backend
 |-------|-------|
 | **Service** | `payment-service` |
 | **Environment** | `production` |
-| **Owner** | `user:default/ezzdddinnemhamdi` |
-| **Port** | `8000` |
+| **Owner** | `` |
+| **Port** | `` |
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ Payment Service Backend
 pip install -r requirements.txt
 
 # Run locally
-uvicorn main:app --reload --port 8000
+uvicorn main:app --reload --port 
 ```
 
 ### Docker
@@ -30,7 +30,7 @@ uvicorn main:app --reload --port 8000
 docker build -t payment-service .
 
 # Run
-docker run -p 8000:8000 payment-service
+docker run -p : payment-service
 ```
 
 ## Kubernetes Deployment
@@ -45,7 +45,7 @@ kubectl get deployment -n payment-service
 kubectl logs -n payment-service -l app.kubernetes.io/name=payment-service -f
 
 # Port forward for local access
-kubectl port-forward -n payment-service svc/payment-service 8000:80
+kubectl port-forward -n payment-service svc/payment-service :80
 ```
 
 ## Monitoring
